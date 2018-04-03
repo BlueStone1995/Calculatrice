@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<VBox spacing="10" alignment="CENTER" prefWidth="300" prefHeight="350" xmlns:fx="http://javafx.com/fxml">
+    <fx:define>
+        <Font fx:id="FONT" size="18"/>
+    </fx:define>
+
+
+    <StackPane alignment="CENTER">
+        <Rectangle fill="TRANSPARENT" stroke="GRAY" width="270" height="50"/>
+        <Text fx:id="output" font="$FONT"/>
+    </StackPane>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button fx:id="sept" text="7" prefWidth="50" font="$FONT"/>
+        <Button fx:id="huit" text="8" prefWidth="50" font="$FONT"/>
+        <Button fx:id="neuf" text="9" prefWidth="50" font="$FONT"/>
+        <Button fx:id="div" text="/" prefWidth="50" font="$FONT"/>
+    </HBox>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button fx:id="quatre" text="4" prefWidth="50" font="$FONT"/>
+        <Button fx:id="cinq" text="5" prefWidth="50" font="$FONT"/>
+        <Button fx:id="six" text="6" prefWidth="50" font="$FONT"/>
+        <Button fx:id="multi" text="*" prefWidth="50" font="$FONT"/>
+    </HBox>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button fx:id="un" text="1" prefWidth="50" font="$FONT"/>
+        <Button fx:id="deux" text="2" prefWidth="50" font="$FONT"/>
+        <Button fx:id="trois" text="3" prefWidth="50" font="$FONT"/>
+        <Button fx:id="moins" text="-" prefWidth="50" font="$FONT"/>
+    </HBox>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button fx:id="zero" text="0" prefWidth="50" font="$FONT"/>
+        <Button fx:id="egal" text="=" prefWidth="50" font="$FONT"/>
+        <Button fx:id="plus" text="+" prefWidth="50" font="$FONT"/>
+        <Button fx:id="puiss" text="^" prefWidth="50" font="$FONT"/>
+    </HBox>
+
+</VBox>
