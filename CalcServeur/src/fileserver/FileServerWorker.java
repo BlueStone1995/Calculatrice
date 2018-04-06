@@ -44,16 +44,12 @@ public class FileServerWorker implements Runnable {
             System.out.println(fileName);
 
             String[] data = fileName.split(":");
-            this.result = interfaceModel.calculer(Float.valueOf(data[0]), Float.valueOf(data[1]), data[2]);
-            System.out.println(this.result);
-
-            f = new FileInputStream(fileName);
 
         } catch (IOException e) {
             activeConnectionCount--;
             if (out != null)
                 try {
-                    t.envoyer("Bad:" + fileName + "\n");
+                    t.envoyer("Bad:" + this.result + "\n");
                 } catch (IOException ex) {
                     Logger.getLogger(FileServer.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -64,29 +60,36 @@ public class FileServerWorker implements Runnable {
             return;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FileServer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DivisionException d) {
-            System.out.println("Division par O interdite...");
-        } catch (OpException o) {
-            System.out.println("Opération non définis...");
-        }// try
-
-        try {
-            // send contents of file to client.
-            t.envoyer("Good:\n");
-        } catch (IOException ex) {
-            Logger.getLogger(FileServer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        byte[] buffer = new byte[4096];
 
         try {
-            int len;
-            while (!shutDownFlag && (len = f.read(buffer)) > 0) {
-                String reponse = new String(buffer, 0, len);
-                //t.envoyer(buffer + "OK" + len);
-                t.envoyer(reponse);
-            } // while
-        } catch (IOException e) {
+            String[] data = fileName.split(":");
+            this.result = interfaceModel.calculer(Float.valueOf(data[0]), Float.valueOf(data[1]), data[2]);
+            System.out.println(this.result);
+            if (data[2].equals("+") || data[2].equals("-") || data[2].equals("*") || data[2].equals("/") || data[2].equals("^")) {
+                t.envoyer(this.result);
+            } else {
+                t.envoyer("Opération non définis");
+            }
+
+        } catch (DivisionException d) {
+            System.out.println("Division par O interdite...");
+            try {
+                t.envoyer("Division par O interdite");
+            } catch (IOException ex) {
+                Logger.getLogger(FileServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } catch (OpException o) {
+            System.out.println("Opération non définis...");
+            try {
+                t.envoyer("Opération non définis");
+            } catch (IOException ex) {
+                Logger.getLogger(FileServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FileServer.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 activeConnectionCount--;

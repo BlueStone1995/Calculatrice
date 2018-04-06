@@ -33,23 +33,19 @@ public class FileClient {
             t.envoyer(a + ":" + b + ":" + op);
             int ch;
             String serverStatus = t.recevoir().toString();
+            System.out.println(serverStatus);
 
             if (serverStatus.startsWith("Bad")) {
                 System.out.println("Bad");
-                exitCode = 1;
                 return "Bad";
             } else {
-                System.out.println("Good");
-                while ((ch = in.read()) >= 0) {
-                    System.out.write((char) ch);
-                    System.out.println(serverStatus);
-                } // while
                 return serverStatus;
                 //System.out.println();
             } // if
 
         } catch (IOException e) {
             exitCode = 1;
+            System.out.println("Erreur : " + e);
         } finally {     // Ferme socket
             try {
                 if (in != null)
